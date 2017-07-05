@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookClubModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BookClub_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUsers" EntityType="BookClubModel1.AspNetUser" />
+    <EntitySet Name="Authors" EntityType="BookClubModel1.Author" />
+    <EntitySet Name="Books" EntityType="BookClubModel1.Book" />
+    <EntitySet Name="Genres" EntityType="BookClubModel1.Genre" />
+    <EntitySet Name="Reviews" EntityType="BookClubModel1.Review" />
+    <EntitySet Name="BookViews" EntityType="BookClubModel1.BookView" />
+    <AssociationSet Name="FK_Review_AspNetUsers" Association="BookClubModel1.FK_Review_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Genre" Association="BookClubModel1.FK_Book_Genre">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_Book" Association="BookClubModel1.FK_Review_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="UsersLikesToBooks" Association="BookClubModel1.UsersLikesToBooks">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="UsersLikesToReviews" Association="BookClubModel1.UsersLikesToReviews">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Author1" Association="BookClubModel1.FK_Book_Author1">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <EntitySet Name="ReviewViews" EntityType="BookClubModel1.ReviewView" />
+  </EntityContainer>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reviews" Relationship="BookClubModel1.FK_Review_AspNetUsers" FromRole="AspNetUser" ToRole="Review" />
+    <NavigationProperty Name="Books" Relationship="BookClubModel1.UsersLikesToBooks" FromRole="AspNetUser" ToRole="Book" />
+    <NavigationProperty Name="LikedReviews" Relationship="BookClubModel1.UsersLikesToReviews" FromRole="AspNetUser" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="BookClubModel1.FK_Book_Author1" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ISBN" />
+    </Key>
+    <Property Name="ISBN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="authorId" Type="Int64" Nullable="false" />
+    <Property Name="genreId" Type="Int64" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Genre" Relationship="BookClubModel1.FK_Book_Genre" FromRole="Book" ToRole="Genre" />
+    <NavigationProperty Name="Reviews" Relationship="BookClubModel1.FK_Review_Book" FromRole="Book" ToRole="Review" />
+    <NavigationProperty Name="aspnet_UsersLikes" Relationship="BookClubModel1.UsersLikesToBooks" FromRole="Book" ToRole="AspNetUser" />
+    <NavigationProperty Name="Author" Relationship="BookClubModel1.FK_Book_Author1" FromRole="Book" ToRole="Author" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="BookClubModel1.FK_Book_Genre" FromRole="Genre" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="headLine" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="bookId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="BookClubModel1.FK_Review_AspNetUsers" FromRole="Review" ToRole="AspNetUser" />
+    <NavigationProperty Name="Book" Relationship="BookClubModel1.FK_Review_Book" FromRole="Review" ToRole="Book" />
+    <NavigationProperty Name="UsersLikes" Relationship="BookClubModel1.UsersLikesToReviews" FromRole="Review" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="BookView">
+    <Key>
+      <PropertyRef Name="ISBN" />
+      <PropertyRef Name="title" />
+      <PropertyRef Name="authorId" />
+      <PropertyRef Name="genreId" />
+      <PropertyRef Name="Author" />
+      <PropertyRef Name="Genre" />
+    </Key>
+    <Property Name="ISBN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="authorId" Type="Int64" Nullable="false" />
+    <Property Name="genreId" Type="Int64" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Author" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Genre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NumOfLikes" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Review_AspNetUsers">
+    <End Type="BookClubModel1.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="BookClubModel1.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Genre">
+    <End Type="BookClubModel1.Genre" Role="Genre" Multiplicity="1" />
+    <End Type="BookClubModel1.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="genreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_Book">
+    <End Type="BookClubModel1.Book" Role="Book" Multiplicity="1" />
+    <End Type="BookClubModel1.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ISBN" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="bookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersLikesToBooks">
+    <End Type="BookClubModel1.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <End Type="BookClubModel1.Book" Role="Book" Multiplicity="*" />
+  </Association>
+  <Association Name="UsersLikesToReviews">
+    <End Type="BookClubModel1.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <End Type="BookClubModel1.Review" Role="Review" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Book_Author1">
+    <End Type="BookClubModel1.Author" Role="Author" Multiplicity="1" />
+    <End Type="BookClubModel1.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReviewView">
+    <Key>
+      <PropertyRef Name="headLine" />
+      <PropertyRef Name="bookId" />
+    </Key>
+    <Property Name="headLine" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="bookId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

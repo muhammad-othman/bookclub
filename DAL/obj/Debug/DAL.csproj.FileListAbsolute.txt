@@ -1,0 +1,9 @@
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\DAL.dll.config
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\DAL.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\DAL.pdb
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\EntityFramework.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\EntityFramework.xml
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\obj\Debug\DAL.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\obj\Debug\DAL.pdb

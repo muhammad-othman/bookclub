@@ -1,0 +1,10 @@
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\DAL.dll.config
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\DAL.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\DAL.pdb
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\EntityFramework.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\EntityFramework.SqlServer.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\EntityFramework.xml
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\bin\Release\EntityFramework.SqlServer.xml
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\obj\Release\DAL.dll
+D:\iTi related\ASP.Net\BookClub\BookClub\DAL\obj\Release\DAL.pdb
